@@ -1,0 +1,15 @@
+//Ransom Note
+//https://leetcode.com/explore/featured/card/may-leetcoding-challenge/534/week-1-may-1st-may-7th/3318/
+
+class Solution {
+public:
+    bool canConstruct(string r, string m) {
+        int a[26]={0},b[26]={0};
+        for(char x:r) a[x-'a']++;
+        for(char x:m) b[x-'a']++;
+        for(int i=0;i<26;i++){
+            if(a[i]>b[i]) return false;
+        }
+        return true;
+    }
+};
