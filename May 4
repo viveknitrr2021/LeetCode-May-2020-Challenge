@@ -1,0 +1,12 @@
+//Number Complement
+//https://leetcode.com/explore/featured/card/may-leetcoding-challenge/534/week-1-may-1st-may-7th/3319/
+
+class Solution {
+public:
+    int findComplement(int num) {
+        int p = floor(log2(num))+1;
+        int q = pow(2,p)-1;
+        int ans = q^num;
+        return ans;
+    }
+};
