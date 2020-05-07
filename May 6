@@ -1,0 +1,15 @@
+//Majority Element
+//https://leetcode.com/explore/featured/card/may-leetcoding-challenge/534/week-1-may-1st-may-7th/3321/
+
+class Solution {
+public:
+    int majorityElement(vector<int>& nums) {
+        int cnt=0;int a;
+        for(auto i:nums){
+            if(cnt==0) a=i;
+            if(a==i) cnt++;
+            else cnt--;
+        }
+        return a;
+    }
+};
