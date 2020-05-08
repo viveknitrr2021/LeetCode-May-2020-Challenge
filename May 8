@@ -1,0 +1,30 @@
+//Check If It Is a Straight Line
+//https://leetcode.com/explore/featured/card/may-leetcoding-challenge/535/week-2-may-8th-may-14th/3323/
+
+
+class Solution {
+public:
+    bool checkStraightLine(vector<vector<int>>& c) {
+        double d; int INF = 1e9;
+        if((c[1][0]-c[0][0]) == 0){
+            d = (INF)*1.0;
+        }
+        else{
+            d = ((c[1][1]-c[0][1])*1.0)/(c[1][0]-c[0][0]);
+            d = abs(d);
+        }
+        if(c.size()==2) return true;
+        for(int i=2;i<c.size();i++){
+            double t;
+            if((c[i][0]-c[i-1][0]) == 0){
+                d = (INF)*1.0;
+            }
+            else{
+                t = ((c[i][1]-c[i-1][1])*1.0) / (c[i][0]-c[i-1][0]);
+                t = abs(t);
+            }
+            if(t != d) return false;
+        }
+        return true;
+    }
+};
