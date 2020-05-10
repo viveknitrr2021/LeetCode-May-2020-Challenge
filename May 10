@@ -1,0 +1,24 @@
+//Find the Town Judge
+//https://leetcode.com/explore/featured/card/may-leetcoding-challenge/535/week-2-may-8th-may-14th/3325/
+
+class Solution {
+public:
+    int findJudge(int N, vector<vector<int>>& trust) {
+        if(trust.size()==0) return 1;
+        map<int,int> mp,m;
+        for(auto x:trust){
+            mp[x[1]]++;
+            m[x[0]]++;
+        }
+        vector<int> v;
+        for(auto x:mp){
+            if(x.second==N-1){
+                v.push_back(x.first);
+            }
+        }
+        for(auto x:v){
+            if(m.find(x)==m.end()) return x;
+        }
+        return -1;
+    }
+};
