@@ -1,0 +1,36 @@
+//Flood Fill
+//https://leetcode.com/explore/challenge/card/may-leetcoding-challenge/535/week-2-may-8th-may-14th/3326/
+
+class Solution {
+public:
+    int dx[4] = {1,-1,0,0};
+    int dy[4] = {0,0,-1,1};
+    int n,m,org;
+    vector<vector<int>> vis;
+    bool issafe(int x,int y,vector<vector<int>>& mat){
+        if(x>=0 and y>=0 and x<n and y<m and vis[x][y]==0 and mat[x][y]==org)
+            return true;
+        return false;
+    }
+    void flood(int a,int b,vector<vector<int>>& mat,int nc){
+        if(vis[a][b]==1) return;
+        else{
+            mat[a][b]=nc;
+            vis[a][b]=1;
+        }
+        for(int i=0;i<4;i++){
+            int x = a+dx[i];
+            int y = b+dy[i];
+            if(issafe(x,y,mat))
+                flood(x,y,mat,nc);
+        }
+    }
+    vector<vector<int>> floodFill(vector<vector<int>>& mat, int sr, int sc, int nc) {
+        n = mat.size();
+        m = mat[0].size();
+        org = mat[sr][sc];
+        vis.resize(n,vector<int>(m,0));
+        flood(sr,sc,mat,nc);
+        return mat;
+    }
+};
