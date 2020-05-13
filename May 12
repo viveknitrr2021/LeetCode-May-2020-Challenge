@@ -1,0 +1,11 @@
+//Single Element in a Sorted Array
+//https://leetcode.com/explore/featured/card/may-leetcoding-challenge/535/week-2-may-8th-may-14th/3327/
+
+class Solution {
+public:
+    int singleNonDuplicate(vector<int>& nums) {
+        int k = 0;
+        for(int x:nums) k^=x;
+        return k;
+    }
+};
