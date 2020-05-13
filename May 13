@@ -1,0 +1,29 @@
+//Remove K Digits
+//https://leetcode.com/explore/featured/card/may-leetcoding-challenge/535/week-2-may-8th-may-14th/3328/
+//https://leetcode.com/problems/remove-k-digits/discuss/630437/Concise-C%2B%2B-Solution-or-With-Explanation-or-Stack
+
+class Solution {
+public:
+    string removeKdigits(string num, int k) {
+        stack<char> st;
+        int i=0;
+        while(i<num.size()){
+            while(!st.empty() and k and st.top()>num[i]){
+                st.pop();k--;
+            }
+            st.push(num[i++]);
+        }
+        while(k--) st.pop();
+        string ans = "";
+        while(!st.empty()) ans+=(st.top()),st.pop();
+        ans = string(ans.rbegin(),ans.rend());
+        for(int i=0;;i++){
+            if(ans[i]!='0'){
+                ans = ans.substr(i,10005);
+                break;
+            }
+        }
+        if(ans.size()==0 or k==num.size()) return "0";
+        return ans;
+    }
+};
