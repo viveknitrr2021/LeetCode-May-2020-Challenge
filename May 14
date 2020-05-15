@@ -1,0 +1,55 @@
+//Implement Trie (Prefix Tree)
+//https://leetcode.com/explore/featured/card/may-leetcoding-challenge/535/week-2-may-8th-may-14th/3329/
+
+
+class Trie {
+public:
+    struct trie{
+        trie *a[26];
+        bool fl=false;
+        trie(){
+            for(int i=0;i<26;i++) a[i]=NULL;
+        }
+    };
+    trie *root = new trie();
+    Trie() {
+        
+    }
+    void insert(string s) {
+        trie *t = root;
+        for(int i=0;i<s.length();i++){
+            int cur = s[i]-'a';
+            if(t->a[cur]==NULL){
+                t->a[cur] = new trie();
+            }
+            t = t->a[cur];
+        }
+        t->fl = true;
+    }
+    bool search(string s) {
+        trie *t = root;
+        for(int i=0;i<s.length();i++){
+            int cur = s[i]-'a';
+            if(t->a[cur]==NULL) return false;
+            t = t->a[cur];
+        }
+        return (t !=NULL and t->fl);
+    }
+    bool startsWith(string s) {
+        trie *t = root;
+        for(int i=0;i<s.length();i++){
+            int cur = s[i]-'a';
+            if(t->a[cur]==NULL) return false;
+            t = t->a[cur];
+        }
+        return (t != NULL);
+    }
+};
+
+/**
+ * Your Trie object will be instantiated and called as such:
+ * Trie* obj = new Trie();
+ * obj->insert(word);
+ * bool param_2 = obj->search(word);
+ * bool param_3 = obj->startsWith(prefix);
+ */
