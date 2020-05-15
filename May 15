@@ -1,0 +1,31 @@
+//Maximum Sum Circular Subarray
+//https://leetcode.com/explore/featured/card/may-leetcoding-challenge/536/week-3-may-15th-may-21st/3330/
+
+class Solution {
+public:
+    int kadane(vector<int>& nums) {
+        int mx=INT_MIN;int cur=0;
+        for(auto i:nums){
+            if(cur+i<0){
+                mx=max(mx,i);
+                cur=0;
+            }
+            else{
+                cur+=i;
+                mx=max(mx,cur);
+            }
+        }
+        return mx;
+    }
+    void invert(vector<int>& A,int n){
+        for(int i=0;i<n;i++) A[i] = -A[i];
+    }
+    int maxSubarraySumCircular(vector<int>& A) {
+        int sum = accumulate(A.begin(),A.end(),0);
+        int ans1 = kadane(A);
+        if(ans1<0) return ans1;
+        invert(A,A.size());
+        int ans2 = sum + kadane(A);
+        return max(ans1,ans2);
+    }
+};
