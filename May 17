@@ -1,0 +1,29 @@
+//Find All Anagrams in a String
+//https://leetcode.com/explore/featured/card/may-leetcoding-challenge/536/week-3-may-15th-may-21st/3332/
+
+class Solution {
+public:
+    vector<int> findAnagrams(string s, string p) {
+        vector<int> pat(26,0),str(26,0),res;
+        
+        int l1=s.size();
+        int l2=p.size();
+        
+        if(l1<l2) return res;
+        
+        for(int i=0;i<l2;i++){
+            pat[p[i]-'a']++;
+            str[s[i]-'a']++;
+        }
+        
+        if(pat==str) res.push_back(0);
+        
+        for(int i=l2;i<l1;i++){
+            str[s[i]-'a']++;
+            str[s[i-l2]-'a']--;
+            if(pat==str) res.push_back(i-l2+1);
+        }
+        
+        return res;
+    }
+};
