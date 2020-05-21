@@ -1,0 +1,17 @@
+//Count Square Submatrices with All Ones
+//https://leetcode.com/explore/featured/card/may-leetcoding-challenge/536/week-3-may-15th-may-21st/3336/
+
+class Solution {
+public:
+    int countSquares(vector<vector<int>>& m) {
+        int t=0;
+        int r=m.size(); int c=m[0].size();
+        for(int i=0;i<r;i++){
+            for(int j=0;j<c;j++){
+                if(i and j and m[i][j]) m[i][j]+=min(m[i-1][j],min(m[i-1][j-1],m[i][j-1]));
+                t+=m[i][j];
+            }
+        }
+        return t;
+    }
+};
