@@ -1,0 +1,24 @@
+//Sort Characters By Frequency
+//https://leetcode.com/explore/featured/card/may-leetcoding-challenge/537/week-4-may-22nd-may-28th/3337/
+
+
+class Solution {
+public:
+    string frequencySort(string s) {
+        vector<pair<int,char>> v;
+        map<char,int> mp;
+        for(auto x:s) mp[x]++;
+        for(auto x:mp){
+            v.push_back({x.second,x.first});
+        }
+        mp.clear();
+        sort(v.rbegin(),v.rend());
+        string ans;
+        for(auto x:v){
+            char ch = x.second;
+            int t = x.first;
+            while(t--) ans += ch;
+        }
+        return ans;
+    }
+};
