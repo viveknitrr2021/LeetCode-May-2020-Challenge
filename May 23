@@ -1,0 +1,27 @@
+//Interval List Intersections
+//https://leetcode.com/explore/challenge/card/may-leetcoding-challenge/537/week-4-may-22nd-may-28th/3338/
+
+
+
+class Solution {
+public:
+    vector<vector<int>> intervalIntersection(vector<vector<int>>& A, vector<vector<int>>& B) {
+       vector<vector<int>> v;
+       for(int i=0;i<A.size();i++){
+           for(int j=0;j<B.size();j++){
+               int x1 = A[i][0];
+               int y1 = A[i][1];
+               int x2 = B[j][0];
+               int y2 = B[j][1];
+               if(y1<x2 or y2<x1) continue;
+               else{
+                   vector<int> vt;
+                   vt.push_back(max(x1,x2));
+                   vt.push_back(min(y1,y2));
+                   v.push_back(vt);
+               }
+           }
+       }
+       return v;
+    }
+};
