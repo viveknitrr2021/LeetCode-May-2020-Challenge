@@ -1,0 +1,24 @@
+// Construct Binary Search Tree from Preorder Traversal
+//https://leetcode.com/explore/featured/card/may-leetcoding-challenge/537/week-4-may-22nd-may-28th/3339/
+
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    int i=0;
+    TreeNode* bstFromPreorder(vector<int>& pre,int p=INT_MAX) {
+        if(i==pre.size() or pre[i]>p) return NULL;
+        int c=pre[i++];
+        TreeNode* t = new TreeNode(c);
+        t->left = bstFromPreorder(pre,c);
+        t->right = bstFromPreorder(pre,p);
+        return t;
+    }
+};
