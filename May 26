@@ -1,0 +1,36 @@
+//Contiguous Array
+//https://leetcode.com/explore/featured/card/may-leetcoding-challenge/537/week-4-may-22nd-may-28th/3341/
+
+class Solution {
+public:
+    int findMaxLength(vector<int>& nums) {
+        if(nums.size()==1) return 0;
+        for(int i=0;i<nums.size();i++){
+            if(nums[i]==0) nums[i]=-1;
+        }
+        int ans=0;
+        map<int,int> mp;
+        int sum[nums.size()];
+        for(int i=0;i<nums.size();i++){
+            if(i==0) sum[i]=nums[i];
+            else sum[i]=sum[i-1]+nums[i];
+        }
+        for(int i=0;i<nums.size();i++){
+            if(sum[i]==0) ans=max(ans,i+1);
+        }
+        for(int i=0;i<nums.size();i++){
+            if(i==0){
+                mp[sum[i]]=i;
+            }
+            else{
+                if(mp.find(sum[i])!=mp.end()){
+                    ans=max(ans,i-mp[sum[i]]);
+                }
+                else{
+                    mp[sum[i]]=i;
+                }
+            }
+        }
+        return ans;
+    }
+};
