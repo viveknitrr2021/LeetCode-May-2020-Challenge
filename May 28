@@ -1,0 +1,43 @@
+//Possible Bipartition
+//https://leetcode.com/explore/featured/card/may-leetcoding-challenge/537/week-4-may-22nd-may-28th/3342/
+
+#define pb(i) push_back(i)
+class Solution {
+public:
+    vector<vector<int>> v;
+    vector<int> col;
+    vector<int> vis;
+    bool find(int src){
+        queue<int> q;
+        q.push(src);
+        col[src]=1;
+        while(!q.empty()){
+            int cur = q.front();q.pop();
+            vis[cur]=1;
+            for(auto node:v[cur]){
+                if(node == cur) return false;//for self loop
+                if(col[node] == -1){
+                    col[node] = 1-col[cur];
+                    q.push(node);
+                }
+                else if(col[node] == col[cur]) return false;
+            }
+        }
+        return true;
+    }
+    bool possibleBipartition(int N, vector<vector<int>>& dis) {
+        v.resize(N+1);
+        col.resize(N+1,-1);
+        vis.resize(N+1,0);
+        for(auto x:dis){
+            v[x[0]].pb(x[1]);
+            v[x[1]].pb(x[0]);
+        }
+        for(int i=1;i<=N;i++){
+            if(vis[i]==0){
+                if(find(i) == false) return false;
+            }
+        }
+        return true;
+    }
+};
