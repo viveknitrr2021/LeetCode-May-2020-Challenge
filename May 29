@@ -1,0 +1,30 @@
+//Course Schedule
+//https://leetcode.com/explore/featured/card/may-leetcoding-challenge/538/week-5-may-29th-may-31st/3344/
+
+class Solution {
+public:
+    bool canFinish(int numCourses, vector<vector<int>>& prerequisites) {
+        if(numCourses==1) return true;
+        vector<int> g[numCourses];
+        vector<int> in(numCourses,0);
+        for(auto i:prerequisites){
+            g[i[1]].push_back(i[0]);
+            in[i[0]]++;
+        }
+        queue<int> q;
+        for(int i=0;i<numCourses;i++){
+            if(!in[i]) q.push(i);
+        }
+        int i=0;
+        while(!q.empty()){
+            i++;
+            int node=q.front();
+            q.pop();
+            for(auto nbr:g[node]){
+                in[nbr]--;
+                if(!in[nbr]) q.push(nbr);
+            }
+        }
+        return (numCourses==i);
+    }
+};
